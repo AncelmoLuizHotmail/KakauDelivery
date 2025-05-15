@@ -14,7 +14,7 @@ namespace KakauDelivey.Infra.RepositoriesReadOnly
             _context = context;
         }
 
-        public virtual async Task<T> GetById(int id)
+        public virtual async Task<T?> GetById(int id)
         {
             return await _context.Set<T>().FindAsync(id);
         }

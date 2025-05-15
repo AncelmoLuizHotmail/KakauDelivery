@@ -18,5 +18,9 @@
         {
             IsDeleted = true;
         }
+        public void SetAsDateUpdate()
+        {
+            DataUpdate = DateTime.Now;
+        }
     }
 }

@@ -30,11 +30,29 @@ namespace KakauDelivery.Application.Applications.Cliente
         public async Task<ResultViewModel> Update(int id, ClienteInputModel inputModel)
         {
             var cliente = await _clienteRepositoryReadOnly.GetById(id);
-            
+
             if (cliente is null)
                 return ResultViewModel.Error("Cliente não encontrado.");
 
-            throw new NotImplementedException();
+            cliente.Update(inputModel.Nome, inputModel.Email, inputModel.Telefone);
+            cliente.SetAsDateUpdate();
+
+            await _clienteService.Update(cliente);
+
+            return ResultViewModel<ClienteViewModel>.Success();
+        }
+        public async Task<ResultViewModel> Delete(int id)
+        {
+            var cliente = await _clienteRepositoryReadOnly.GetById(id);
+
+            if (cliente is null)
+                return ResultViewModel.Error("Cliente não encontrado.");
+
+            cliente.SetAsDeleted();
+            cliente.SetAsDateUpdate();
+            await _clienteService.Delete(cliente);
+
+            return ResultViewModel.Success();
         }
 
         public async Task<ResultViewModel<IEnumerable<ClienteViewModel>>> GetAll()
@@ -47,13 +65,11 @@ namespace KakauDelivery.Application.Applications.Cliente
         public async Task<ResultViewModel<ClienteViewModel>> GetById(int id)
         {
             var cliente = await _clienteRepositoryReadOnly.GetById(id);
-            
+
             if (cliente is null)
                 return ResultViewModel<ClienteViewModel>.Error("Cliente não encontrado.");
 
             return ResultViewModel<ClienteViewModel>.Success(cliente.EntityForViewModel());
         }
-
-       
     }
 }

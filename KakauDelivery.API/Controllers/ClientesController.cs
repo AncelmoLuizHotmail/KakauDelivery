@@ -36,16 +36,31 @@ namespace KakauDelivery.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(ClienteInputModel inputModel)
         {
-          var result = await _clienteApp.Create(inputModel);
+            var result = await _clienteApp.Create(inputModel);
 
-          return CreatedAtAction(nameof(GetById), new { id = result.Data?.Id }, result);
+            return CreatedAtAction(nameof(GetById), new { id = result.Data?.Id }, result);
         }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> Put(int id, ClienteInputModel cliente)
-        //{
-        //    var result = await _clienteApp.Update(id, cliente);
-            
-        //}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, ClienteInputModel cliente)
+        {
+            var result = await _clienteApp.Update(id, cliente);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _clienteApp.Delete(id);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return NoContent();
+        }
     }
 }

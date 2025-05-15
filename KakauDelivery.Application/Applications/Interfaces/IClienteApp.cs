@@ -9,6 +9,7 @@ namespace KakauDelivery.Application.Applications.Interfaces
         Task<ResultViewModel> Update(int id, ClienteInputModel inputModel);
         Task<ResultViewModel<ClienteViewModel>> GetById(int id);
         Task<ResultViewModel<IEnumerable<ClienteViewModel>>> GetAll();
+        Task<ResultViewModel> Delete(int id);
 
     }
 }

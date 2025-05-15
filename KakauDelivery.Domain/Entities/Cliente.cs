@@ -16,6 +16,13 @@
         public string Email { get; private set; }
         public string Telefone { get; private set; }
         public List<Pedido> Pedidos { get; private set; }
+
+        public void Update(string nome, string email, string telefone)
+        {
+            Nome = nome;
+            Email = email;
+            Telefone = telefone;
+        }
     }
 
 }
