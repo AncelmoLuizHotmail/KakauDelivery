@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.36105.23 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aplicattion", "Aplicattion", "{CCE2C409-F04A-43FB-89F2-EA37A6B5E037}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{9EEC973A-6608-44E8-9D37-358A767D86E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{87583B12-969E-4B01-8488-F9A2EA67F7B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KakauDelivery.API", "KakauDelivery.API\KakauDelivery.API.csproj", "{206A304B-5B7F-46E9-99B4-5510C1279201}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KakauDelivery.Application", "KakauDelivery.Application\KakauDelivery.Application.csproj", "{DDF45BB2-6DB3-4B5B-BDC2-A701FF65A8D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KakauDelivery.Domain", "KakauDelivery.Domain\KakauDelivery.Domain.csproj", "{17D92D4D-7BBE-404F-8043-68188E09B257}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KakauDelivey.Infra", "KakauDelivey.Infra\KakauDelivey.Infra.csproj", "{72E30030-AA30-4567-97C5-344A88E9D7F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{206A304B-5B7F-46E9-99B4-5510C1279201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{206A304B-5B7F-46E9-99B4-5510C1279201}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{206A304B-5B7F-46E9-99B4-5510C1279201}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{206A304B-5B7F-46E9-99B4-5510C1279201}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDF45BB2-6DB3-4B5B-BDC2-A701FF65A8D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF45BB2-6DB3-4B5B-BDC2-A701FF65A8D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDF45BB2-6DB3-4B5B-BDC2-A701FF65A8D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDF45BB2-6DB3-4B5B-BDC2-A701FF65A8D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17D92D4D-7BBE-404F-8043-68188E09B257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17D92D4D-7BBE-404F-8043-68188E09B257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17D92D4D-7BBE-404F-8043-68188E09B257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17D92D4D-7BBE-404F-8043-68188E09B257}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72E30030-AA30-4567-97C5-344A88E9D7F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72E30030-AA30-4567-97C5-344A88E9D7F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72E30030-AA30-4567-97C5-344A88E9D7F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72E30030-AA30-4567-97C5-344A88E9D7F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{206A304B-5B7F-46E9-99B4-5510C1279201} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{DDF45BB2-6DB3-4B5B-BDC2-A701FF65A8D2} = {CCE2C409-F04A-43FB-89F2-EA37A6B5E037}
+		{17D92D4D-7BBE-404F-8043-68188E09B257} = {9EEC973A-6608-44E8-9D37-358A767D86E5}
+		{72E30030-AA30-4567-97C5-344A88E9D7F5} = {87583B12-969E-4B01-8488-F9A2EA67F7B0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9C538A07-D038-4DE9-8C4C-B3632917EC93}
+	EndGlobalSection
+EndGlobal
