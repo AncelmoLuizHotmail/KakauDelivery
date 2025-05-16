@@ -11,6 +11,14 @@ namespace KakauDelivey.Infra.RepositoriesReadOnly
         {
         }
 
+        public override async Task<Pedido?> GetById(int id)
+        {
+            return await _context.Pedidos
+                .Include(p => p.Cliente)
+                .Include(p => p.Itens)
+                    .ThenInclude(ip => ip.Produto)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
         public async Task<Pedido?> GetPedidoByCliente(int idPedido, int idCliente)
         {
             return await _context.Pedidos

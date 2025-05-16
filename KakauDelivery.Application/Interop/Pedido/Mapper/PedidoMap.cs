@@ -1,4 +1,5 @@
-﻿using KakauDelivery.Application.Interop.ItemPedido.Mapper;
+﻿using KakauDelivery.Application.Interop.ItemPedido;
+using KakauDelivery.Application.Interop.ItemPedido.Mapper;
 using KakauDelivery.Application.Interop.Produto.Mapper;
 
 namespace KakauDelivery.Application.Interop.Pedido.Mapper
@@ -21,7 +22,7 @@ namespace KakauDelivery.Application.Interop.Pedido.Mapper
                 NumeroPedido = entity.Id,
                 DataPedido = entity.DataPedido,
                 Total = entity.Total,
-                Itens = entity.Itens.EntityForViewModelList().ToList()
+                Itens = entity.Itens.EntityForViewModelList()
             };
         }
     }

@@ -21,7 +21,7 @@ namespace KakauDelivery.Application.Interop.ItemPedido.Mapper
             };
         }
 
-        public static IEnumerable<ItemPedidoViewModel> EntityForViewModelList(this IEnumerable<Domain.Entities.ItemPedido> entityList)
+        public static List<ItemPedidoViewModel> EntityForViewModelList(this IEnumerable<Domain.Entities.ItemPedido> entityList)
         {
             return (from entity in entityList
                     select new ItemPedidoViewModel
@@ -29,8 +29,7 @@ namespace KakauDelivery.Application.Interop.ItemPedido.Mapper
                         IdProduto = entity.IdProduto,
                         Quantidade = entity.Quantidade,
                         Produto = entity.Produto.EntityForViewModel()
-                    })
-                    .ToList();
+                    }).ToList();
         }
 
         public static IEnumerable<Domain.Entities.ItemPedido> ViewModelForEntityList(this IEnumerable<ItemPedidoViewModel> viewModelList)

@@ -14,7 +14,7 @@ namespace KakauDelivery.API.Controllers
             _pedidoApp = pedidoApp;
         }
 
-        [HttpGet("getById/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _pedidoApp.GetById(id);
@@ -40,11 +40,11 @@ namespace KakauDelivery.API.Controllers
         public async Task<IActionResult> Post(PedidoInputModel inputModel)
         {
             var result = await _pedidoApp.Create(inputModel);
-            
+
             if (!result.IsSuccess)
                 return BadRequest(result.Message);
 
-            return CreatedAtAction(nameof(GetById), new { id = result.Data?.NumeroPedido }, result);
+            return Ok(result);
         }
 
         [HttpPut("{id}")]
