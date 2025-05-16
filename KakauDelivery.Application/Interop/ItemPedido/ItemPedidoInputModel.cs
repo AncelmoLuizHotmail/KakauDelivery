@@ -2,11 +2,12 @@
 
 namespace KakauDelivery.Application.Interop.ItemPedido
 {
-    public class ItemPedidoViewModel
+    public class ItemPedidoInputModel
     {
         public int IdPedido { get; set; }
         public int IdProduto { get; set; }
         public int Quantidade { get; set; }
-        public ProdutoViewModel Produto { get; set; }
+
+        public ProdutoInputModel Produto { get; set; }
     }
 }

@@ -6,13 +6,12 @@ namespace KakauDelivery.Domain.Entities
     {
         public Pedido() { }
 
-        public Pedido(int idCliente, DateTime dataPedido, StatusPedidoEnum status)
+        public Pedido(int idCliente, DateTime dataPedido, List<ItemPedido> itens)
         {
             IdCliente = idCliente;
             DataPedido = dataPedido;
+            Itens = itens;
             Total = CalcularTotal();
-            Status = status;
-            Itens = [];
         }
 
         public int IdCliente { get; private set; }
@@ -23,9 +22,16 @@ namespace KakauDelivery.Domain.Entities
         public Cliente Cliente { get; private set; }
         public List<ItemPedido> Itens { get; private set; }
 
-        private decimal CalcularTotal()
+        public void Update(int idCliente, DateTime dataPedido, List<ItemPedido> itens)
         {
-            return Itens.Sum(i => i.Quantidade * i.Produto.Preco);
+            IdCliente = idCliente;
+            DataPedido = dataPedido;
+            Itens = itens;
         }
+        private decimal CalcularTotal() => Itens.Sum(i => i.Quantidade * i.Produto.Preco);
+        public void AguardandoPagamento() => Status = StatusPedidoEnum.AguardandoPagamento;
+        public void Pago() => Status = StatusPedidoEnum.Pago;
+        public bool PedidoPago() => Status == StatusPedidoEnum.Pago ? true : false;
+
     }
 }
