@@ -10,13 +10,15 @@ namespace KakauDelivey.Infra.Services
     {
         private readonly string _secretKey;
         private readonly string _issuer;
+        private readonly string _audience;
         private readonly int _expiryInMinutes;
 
-        public JwtService(string secretKey, string issuer, int expiryInMinutes)
+        public JwtService(string secretKey, string issuer, string audience, int expiryInMinutes)
         {
             _secretKey = secretKey;
             _issuer = issuer;
             _expiryInMinutes = expiryInMinutes;
+            _audience = audience;
         }
 
         public string GenerateToken(Usuario usuario)
@@ -37,6 +39,7 @@ namespace KakauDelivey.Infra.Services
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddMinutes(_expiryInMinutes),
                 Issuer = _issuer,
+                Audience = _audience,
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)

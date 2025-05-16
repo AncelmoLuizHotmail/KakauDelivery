@@ -1,4 +1,5 @@
-﻿using KakauDelivery.Application.Applications.Interfaces;
+﻿using KakauDelivery.API.Helpers;
+using KakauDelivery.Application.Applications.Interfaces;
 using KakauDelivery.Application.Interop.Cliente;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,7 @@ namespace KakauDelivery.API.Controllers
         }
 
         [HttpGet("getById/{id}")]
+        [AuthorizeRoles("Comprador", "Vendedor")]
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _clienteApp.GetById(id);
@@ -26,6 +28,7 @@ namespace KakauDelivery.API.Controllers
         }
 
         [HttpGet("getAll")]
+        [AuthorizeRoles("Comprador", "Vendedor")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _clienteApp.GetAll();
@@ -34,6 +37,7 @@ namespace KakauDelivery.API.Controllers
         }
 
         [HttpPost]
+        [AuthorizeRoles("Comprador", "Vendedor")]
         public async Task<IActionResult> Post(ClienteInputModel inputModel)
         {
             if (!ModelState.IsValid)
@@ -45,6 +49,7 @@ namespace KakauDelivery.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [AuthorizeRoles("Comprador", "Vendedor")]
         public async Task<IActionResult> Put(int id, ClienteInputModel cliente)
         {
             var result = await _clienteApp.Update(id, cliente);
@@ -56,6 +61,7 @@ namespace KakauDelivery.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [AuthorizeRoles("Comprador", "Vendedor")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _clienteApp.Delete(id);
