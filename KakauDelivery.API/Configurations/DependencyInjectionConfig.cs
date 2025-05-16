@@ -1,6 +1,7 @@
 ﻿using KakauDelivery.Application.Applications.Cliente;
 using KakauDelivery.Application.Applications.Interfaces;
 using KakauDelivery.Application.Applications.Pedido;
+using KakauDelivery.Application.Applications.Usuario;
 using KakauDelivery.Application.Services;
 using KakauDelivery.Application.Services.Interfaces;
 using KakauDelivery.Domain.Repositories.Repository;
@@ -23,6 +24,11 @@ namespace KakauDelivery.API.Configurations
             services.AddScoped<IPedidoService, PedidoService>();
             services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddScoped<IPedidoRepositoryReadOnly, PedidoRepositoryReadOnly>();
+
+            services.AddScoped<IUsuarioApp, UsuarioApp>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IUsuarioRepositoryReadOnly, UsuarioRepositoryReadOnly>();
         }
     }
 }
