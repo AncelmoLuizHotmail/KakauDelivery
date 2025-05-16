@@ -54,9 +54,9 @@ namespace KakauDelivery.Application.Applications.Pedido
             return ResultViewModel.Success();
         }
 
-        public async Task<ResultViewModel<IEnumerable<PedidoViewModel>>> GetAll()
+        public async Task<ResultViewModel<IEnumerable<PedidoViewModel>>> GetAll(PedidoFilter filter)
         {
-            var pedidos = await _pedidoRepositoryReadOnly.GetAll();
+            var pedidos = await _pedidoRepositoryReadOnly.GetPedidoByDataOrStatus(filter.Data, filter.Status);
 
             return ResultViewModel<IEnumerable<PedidoViewModel>>.Success(pedidos.EntityForViewModelList());
         }

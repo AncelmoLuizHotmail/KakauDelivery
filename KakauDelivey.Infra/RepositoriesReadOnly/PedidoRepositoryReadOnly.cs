@@ -1,4 +1,5 @@
 ﻿using KakauDelivery.Domain.Entities;
+using KakauDelivery.Domain.Enums;
 using KakauDelivery.Domain.Repositories.RepositoryReadOnly;
 using KakauDelivey.Infra.KakauDeliveryContext;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,19 @@ namespace KakauDelivey.Infra.RepositoriesReadOnly
                     .ThenInclude(ip => ip.Produto)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.IdCliente == idCliente && p.Id == idPedido);
+        }
+
+        public async Task<IEnumerable<Pedido>?> GetPedidoByDataOrStatus(DateTime data, StatusPedidoEnum status)
+        {
+            var pedidos = await _context.Pedidos
+                .AsNoTracking()
+                .Include(p => p.Cliente)
+                .Include(p => p.Itens)
+                    .ThenInclude(ip => ip.Produto)
+                .Where(x => x.DataCreate.Date == data.Date && x.Status == status)
+                .ToListAsync();
+
+            return pedidos;
         }
     }
 }

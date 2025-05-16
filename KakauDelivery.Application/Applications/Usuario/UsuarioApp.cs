@@ -46,8 +46,6 @@ namespace KakauDelivery.Application.Applications.Usuario
 
             await _usuarioService.Create(usuario);
 
-            //var novoUsuario = await _usuarioRepositoryReadOnly.GetUsuarioByEmail(usuario.Email);
-
             if (inputModel.Perfil == PerfilUsuarioEnum.Comprador)
             {
                 if (inputModel.Cliente == null)

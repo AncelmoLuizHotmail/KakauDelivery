@@ -1,26 +1,33 @@
 ﻿using KakauDelivery.Application.Services.Interfaces;
 using KakauDelivery.Domain.Entities;
 using KakauDelivery.Domain.Repositories.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KakauDelivery.Application.Services
 {
     public class PedidoService : IPedidoService
     {
         private readonly IPedidoRepository _pedidoRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public PedidoService(IPedidoRepository pedidoRepository)
+        public PedidoService(IPedidoRepository pedidoRepository, IUnitOfWork unitOfWork)
         {
             _pedidoRepository = pedidoRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task Create(Pedido entity)
         {
-            await _pedidoRepository.Create(entity);
+            try
+            {
+                await _unitOfWork.BeginTransactionAsync();
+                await _pedidoRepository.Create(entity);
+                await _unitOfWork.CommitAsync();
+            }
+            catch (Exception)
+            {
+                await _unitOfWork.RollbackAsync();
+                throw;
+            }
         }
 
         public Task Delete(Pedido entity)

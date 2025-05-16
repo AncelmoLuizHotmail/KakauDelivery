@@ -15,6 +15,8 @@ namespace KakauDelivery.API.Configurations
     {
         public static void RegisterServices(this IServiceCollection services)
         {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddScoped<IClienteApp, ClienteApp>();
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IClienteRepository, ClienteRepository>();

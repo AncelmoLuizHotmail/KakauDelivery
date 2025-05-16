@@ -7,7 +7,7 @@ namespace KakauDelivery.Application.Applications.Interfaces
     {
         Task<ResultViewModel<PedidoViewModel>> GetPedidoByCliente(int idPedido, int idCliente);
         Task<ResultViewModel<PedidoViewModel>> GetById(int id);
-        Task<ResultViewModel<IEnumerable<PedidoViewModel>>> GetAll();
+        Task<ResultViewModel<IEnumerable<PedidoViewModel>>> GetAll(PedidoFilter filter);
         Task<ResultViewModel<PedidoViewModel>> Create(PedidoInputModel inputModel);
         Task<ResultViewModel> Update(int id, PedidoInputModel inputModel);
         Task<ResultViewModel> Delete(int id);

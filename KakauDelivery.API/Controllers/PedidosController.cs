@@ -28,11 +28,11 @@ namespace KakauDelivery.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getAll")]
+        [HttpPost("getAll")]
         [Authorize(Roles = "Vendedor")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromBody]PedidoFilter filter)
         {
-            var result = await _pedidoApp.GetAll();
+            var result = await _pedidoApp.GetAll(filter);
 
             return Ok(result);
         }
