@@ -1,8 +1,6 @@
 ﻿using KakauDelivery.Domain.Entities;
-using KakauDelivery.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KakauDelivey.Infra.Mappings
 {
@@ -24,13 +22,13 @@ namespace KakauDelivey.Infra.Mappings
 
             builder.Property(u => u.Perfil)
                 .IsRequired()
-                .HasConversion(new EnumToStringConverter<PerfilUsuarioEnum>());
+                .HasConversion<string>();
 
 
             builder.HasOne(u => u.Cliente)
-                .WithMany()
-                .HasForeignKey(u => u.IdCliente)
-                .OnDelete(DeleteBehavior.Restrict);
+                .WithOne(c => c.Usuario)
+                .HasForeignKey<Cliente>(c => c.IdUsuario)
+                .IsRequired();
         }
     }
 }

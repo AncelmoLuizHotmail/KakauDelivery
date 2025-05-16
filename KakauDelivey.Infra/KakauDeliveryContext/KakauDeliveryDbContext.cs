@@ -22,6 +22,7 @@ namespace KakauDelivey.Infra.KakauDeliveryContext
             modelBuilder.ApplyConfiguration(new ProdutoMapper());
             modelBuilder.ApplyConfiguration(new PedidoMapper());
             modelBuilder.ApplyConfiguration(new ItemPedidoMapper());
+            modelBuilder.ApplyConfiguration(new UsuarioMapper());
 
             base.OnModelCreating(modelBuilder);
         }

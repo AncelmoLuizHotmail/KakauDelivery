@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KakauDelivey.Infra.Migrations
 {
     [DbContext(typeof(KakauDeliveryDbContext))]
-    [Migration("20250516034147_FirstMigragions")]
-    partial class FirstMigragions
+    [Migration("20250516181102_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,9 @@ namespace KakauDelivey.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(300)");
 
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -54,6 +57,9 @@ namespace KakauDelivey.Infra.Migrations
                         .HasColumnType("varchar(15)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdUsuario")
+                        .IsUnique();
 
                     b.ToTable("Clientes", (string)null);
                 });
@@ -164,6 +170,51 @@ namespace KakauDelivey.Infra.Migrations
                     b.ToTable("Produtos", (string)null);
                 });
 
+            modelBuilder.Entity("KakauDelivery.Domain.Entities.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(300)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Perfil")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenhaHash")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios", (string)null);
+                });
+
+            modelBuilder.Entity("KakauDelivery.Domain.Entities.Cliente", b =>
+                {
+                    b.HasOne("KakauDelivery.Domain.Entities.Usuario", "Usuario")
+                        .WithOne("Cliente")
+                        .HasForeignKey("KakauDelivery.Domain.Entities.Cliente", "IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("KakauDelivery.Domain.Entities.ItemPedido", b =>
                 {
                     b.HasOne("KakauDelivery.Domain.Entities.Pedido", "Pedido")
@@ -207,6 +258,11 @@ namespace KakauDelivey.Infra.Migrations
             modelBuilder.Entity("KakauDelivery.Domain.Entities.Produto", b =>
                 {
                     b.Navigation("ItensPedido");
+                });
+
+            modelBuilder.Entity("KakauDelivery.Domain.Entities.Usuario", b =>
+                {
+                    b.Navigation("Cliente");
                 });
 #pragma warning restore 612, 618
         }

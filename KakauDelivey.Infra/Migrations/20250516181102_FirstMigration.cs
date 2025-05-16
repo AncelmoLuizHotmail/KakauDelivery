@@ -6,29 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace KakauDelivey.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigragions : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Clientes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "varchar(250)", nullable: false),
-                    Email = table.Column<string>(type: "varchar(300)", nullable: false),
-                    Telefone = table.Column<string>(type: "varchar(15)", nullable: true),
-                    DataCreate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DataUpdate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clientes", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Produtos",
                 columns: table => new
@@ -45,6 +27,49 @@ namespace KakauDelivey.Infra.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Produtos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "varchar(300)", nullable: false),
+                    SenhaHash = table.Column<string>(type: "varchar(255)", nullable: false),
+                    Perfil = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataCreate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataUpdate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clientes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdUsuario = table.Column<int>(type: "int", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(250)", nullable: false),
+                    Email = table.Column<string>(type: "varchar(300)", nullable: false),
+                    Telefone = table.Column<string>(type: "varchar(15)", nullable: true),
+                    DataCreate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataUpdate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clientes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Clientes_Usuarios_IdUsuario",
+                        column: x => x.IdUsuario,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,6 +128,12 @@ namespace KakauDelivey.Infra.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Clientes_IdUsuario",
+                table: "Clientes",
+                column: "IdUsuario",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ItensPedido_IdPedido",
                 table: "ItensPedido",
                 column: "IdPedido");
@@ -137,6 +168,9 @@ namespace KakauDelivey.Infra.Migrations
 
             migrationBuilder.DropTable(
                 name: "Clientes");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
         }
     }
 }

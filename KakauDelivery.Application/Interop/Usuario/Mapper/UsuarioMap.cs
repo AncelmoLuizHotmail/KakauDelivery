@@ -6,8 +6,8 @@ namespace KakauDelivery.Application.Interop.Usuario.Mapper
     {
         public static Domain.Entities.Usuario InputModelForEntity(this UsuarioInputModel inputModel)
         {
-            var cliente = inputModel.Cliente.InputModelForEntity();
-            return new Domain.Entities.Usuario(inputModel.Email, inputModel.Senha, inputModel.Perfil.ToString(), cliente);
+            var cliente = inputModel.Cliente?.InputModelForEntity();
+            return new Domain.Entities.Usuario(inputModel.Email, inputModel.Senha, inputModel.Perfil, cliente);
         }
 
         public static UsuarioViewModel EntityForViewModel(this Domain.Entities.Usuario entity)
@@ -16,9 +16,9 @@ namespace KakauDelivery.Application.Interop.Usuario.Mapper
             {
                 Id = entity.Id,
                 Email = entity.Email,
-                Perfil = entity.Perfil,
-                IdCliente = entity.IdCliente,
-                Cliente = entity.Cliente.EntityForViewModel()
+                Perfil = entity.Perfil.ToString(),
+                IdCliente = entity.Cliente?.Id,
+                Cliente = entity.Cliente?.EntityForViewModel()
             };
         }
     }
