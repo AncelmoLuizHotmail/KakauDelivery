@@ -4,7 +4,7 @@
     {
         public static Domain.Entities.Cliente InputModelForEntity(this ClienteInputModel inputModel)
         {
-            return new Domain.Entities.Cliente(inputModel.Nome, inputModel.Email, inputModel.Telefone);
+            return new Domain.Entities.Cliente(inputModel.IdUsuario, inputModel.Nome, inputModel.Email, inputModel.Telefone);
         }
 
         public static ClienteViewModel EntityForViewModel(this Domain.Entities.Cliente entity)
@@ -12,6 +12,7 @@
             return new ClienteViewModel()
             {
                 Id = entity.Id,
+                IdUsuario = entity.IdUsuario,
                 Nome = entity.Nome,
                 Email = entity.Email,
                 Telefone = entity.Telefone
@@ -24,9 +25,11 @@
                     select new ClienteViewModel
                     {
                         Id = entity.Id,
+                        IdUsuario = entity.IdUsuario,
                         Nome = entity.Nome,
                         Email = entity.Email,
-                        Telefone = entity.Telefone,
+                        Telefone = entity.Telefone
+
                     }).ToList();
         }
     }

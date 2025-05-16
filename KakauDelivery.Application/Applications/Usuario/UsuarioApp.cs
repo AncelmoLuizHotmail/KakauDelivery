@@ -28,26 +28,11 @@ namespace KakauDelivery.Application.Applications.Usuario
         }
         public async Task<ResultViewModel<UsuarioViewModel>> RegistrarUsuario(UsuarioInputModel inputModel)
         {
+            ClienteInputModel cliente = null;
             var usuarioExistente = await _usuarioRepositoryReadOnly.GetUsuarioByEmail(inputModel.Email);
 
             if (usuarioExistente.Any())
                 return ResultViewModel<UsuarioViewModel>.Error("Usuário já cadastrado com esse e-mail.");
-
-            ClienteInputModel cliente = null;
-            if (inputModel.Perfil == PerfilUsuarioEnum.Comprador)
-            {
-                if (inputModel.Cliente == null)
-                    return ResultViewModel<UsuarioViewModel>.Error("Dados do cliente são obrigatórios para compradores");
-
-                cliente = new ClienteInputModel
-                {
-                    Nome = inputModel.Cliente.Nome,
-                    Telefone = inputModel.Cliente.Telefone,
-                    Email = inputModel.Cliente.Email
-                };
-
-                await _clenteApp.Create(cliente);
-            }
 
             var usuarioIM = new UsuarioInputModel
             {
@@ -60,6 +45,24 @@ namespace KakauDelivery.Application.Applications.Usuario
             var usuario = usuarioIM.InputModelForEntity();
 
             await _usuarioService.Create(usuario);
+
+            //var novoUsuario = await _usuarioRepositoryReadOnly.GetUsuarioByEmail(usuario.Email);
+
+            if (inputModel.Perfil == PerfilUsuarioEnum.Comprador)
+            {
+                if (inputModel.Cliente == null)
+                    return ResultViewModel<UsuarioViewModel>.Error("Dados do cliente são obrigatórios para compradores");
+
+                cliente = new ClienteInputModel
+                {
+                    Nome = inputModel.Cliente.Nome,
+                    Telefone = inputModel.Cliente.Telefone,
+                    Email = inputModel.Cliente.Email,
+                    IdUsuario = usuario.Id
+                };
+
+                await _clenteApp.Create(cliente);
+            }
 
             return ResultViewModel<UsuarioViewModel>.Success(usuario.EntityForViewModel());
         }

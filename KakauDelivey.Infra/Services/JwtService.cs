@@ -29,7 +29,7 @@ namespace KakauDelivey.Infra.Services
                 new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
                 new Claim(ClaimTypes.Email, usuario.Email),
                 new Claim(ClaimTypes.Role, usuario.Perfil.ToString()),
-                new Claim("IdCliente", usuario.Cliente.Id.ToString() ?? "")
+                new Claim("IdCliente", usuario.Cliente?.Id.ToString() ?? "")
         };
 
             var tokenDescriptor = new SecurityTokenDescriptor

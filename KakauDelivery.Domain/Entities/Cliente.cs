@@ -4,8 +4,9 @@
     {
         public Cliente() { }
 
-        public Cliente(string nome, string email, string telefone)
+        public Cliente(int idUsuario, string nome, string email, string telefone)
         {
+            IdUsuario = idUsuario;
             Nome = nome;
             Email = email;
             Telefone = telefone;

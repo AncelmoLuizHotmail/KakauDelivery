@@ -12,5 +12,6 @@ namespace KakauDelivery.Application.Interop.Cliente
         [EmailAddress(ErrorMessage = "O Email informado não é válido.")]
         public string Email { get; set; } = null!;
         public string Telefone { get; set; } = string.Empty;
+        public int IdUsuario { get; set; }
     }
 }
