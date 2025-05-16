@@ -1,4 +1,5 @@
 ﻿using KakauDelivery.Domain.Entities;
+using KakauDelivery.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

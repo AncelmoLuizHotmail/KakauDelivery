@@ -39,10 +39,10 @@ namespace KakauDelivery.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(PedidoInputModel inputModel)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var result = await _pedidoApp.Create(inputModel);
+            
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
 
             return CreatedAtAction(nameof(GetById), new { id = result.Data?.NumeroPedido }, result);
         }

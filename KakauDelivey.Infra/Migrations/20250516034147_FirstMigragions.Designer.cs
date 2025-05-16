@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KakauDelivey.Infra.Migrations
 {
     [DbContext(typeof(KakauDeliveryDbContext))]
-    [Migration("20250515025249_FirstMigrations")]
-    partial class FirstMigrations
+    [Migration("20250516034147_FirstMigragions")]
+    partial class FirstMigragions
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

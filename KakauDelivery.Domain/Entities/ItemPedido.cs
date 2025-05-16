@@ -4,17 +4,23 @@
     {
         public ItemPedido() { }
 
-        public ItemPedido(int idPedido, int idProduto, int quantidade)
+        public ItemPedido(Produto produto, int quantidade)
         {
-            IdPedido = idPedido;
-            IdProduto = idProduto;
+            IdProduto = produto.Id;
             Quantidade = quantidade;
+            Produto = produto;
         }
+
         public int IdPedido { get; private set; }
         public int IdProduto { get; private set; }
         public int Quantidade { get; private set; }
 
         public Pedido Pedido { get; private set; }
         public Produto Produto { get; private set; }
+
+        public void AgregatePedido(Pedido pedido) 
+        { 
+            Pedido = pedido;
+        }
     }
 }

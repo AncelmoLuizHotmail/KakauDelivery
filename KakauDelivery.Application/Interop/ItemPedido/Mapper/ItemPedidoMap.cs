@@ -6,7 +6,9 @@ namespace KakauDelivery.Application.Interop.ItemPedido.Mapper
     {
         public static Domain.Entities.ItemPedido InputModelForEntity(this ItemPedidoInputModel inputModel)
         {
-            return new Domain.Entities.ItemPedido(inputModel.IdPedido, inputModel.IdProduto, inputModel.Quantidade);
+            var produto = inputModel.Produto.ViewModelForEntity();
+
+            return new Domain.Entities.ItemPedido(produto, inputModel.Quantidade);
         }
 
         public static ItemPedidoViewModel EntityForViewModel(this Domain.Entities.ItemPedido entity)
@@ -34,7 +36,7 @@ namespace KakauDelivery.Application.Interop.ItemPedido.Mapper
         public static IEnumerable<Domain.Entities.ItemPedido> ViewModelForEntityList(this IEnumerable<ItemPedidoViewModel> viewModelList)
         {
             return (from viewModel in viewModelList
-                    select new Domain.Entities.ItemPedido(viewModel.IdPedido, viewModel.IdProduto, viewModel.Quantidade)).ToList();
+                    select new Domain.Entities.ItemPedido(viewModel.Produto.ViewModelForEntity(), viewModel.Quantidade)).ToList();
         }
     }
 }
