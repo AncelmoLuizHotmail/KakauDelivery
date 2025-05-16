@@ -10,6 +10,8 @@ namespace KakauDelivery.Application.Applications.Interfaces
         Task<ResultViewModel<IEnumerable<PedidoViewModel>>> GetAll(PedidoFilter filter);
         Task<ResultViewModel<PedidoViewModel>> Create(PedidoInputModel inputModel);
         Task<ResultViewModel> Update(int id, PedidoInputModel inputModel);
+        Task<ResultViewModel> DeleteLogical(int id);
         Task<ResultViewModel> Delete(int id);
+        Task<ResultViewModel<PedidoViewModel>> PagarPedido(PedidoPagarInputModel inputModel);
     }
 }

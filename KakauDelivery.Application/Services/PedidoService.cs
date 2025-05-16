@@ -30,14 +30,48 @@ namespace KakauDelivery.Application.Services
             }
         }
 
-        public Task Delete(Pedido entity)
+        public async Task DeleteLogical(Pedido entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _unitOfWork.BeginTransactionAsync();
+                await _pedidoRepository.Delete(entity);
+                await _unitOfWork.CommitAsync();
+            }
+            catch (Exception)
+            {
+                await _unitOfWork.RollbackAsync();
+                throw;
+            }
+        }
+        public async Task Delete(Pedido entity)
+        {
+            try
+            {
+                await _unitOfWork.BeginTransactionAsync();
+                await _pedidoRepository.Excluir(entity);
+                await _unitOfWork.CommitAsync();
+            }
+            catch (Exception)
+            {
+                await _unitOfWork.RollbackAsync();
+                throw;
+            }
         }
 
-        public Task Update(Pedido entity)
+        public async Task Update(Pedido entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _unitOfWork.BeginTransactionAsync();
+                await _pedidoRepository.Update(entity);
+                await _unitOfWork.CommitAsync();
+            }
+            catch (Exception)
+            {
+                await _unitOfWork.RollbackAsync();
+                throw;
+            }
         }
     }
 }

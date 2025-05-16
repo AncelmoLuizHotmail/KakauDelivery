@@ -9,5 +9,11 @@ namespace KakauDelivey.Infra.Repositories
         public PedidoRepository(KakauDeliveryDbContext context) : base(context)
         {
         }
+
+        public async Task Excluir(Pedido entity)
+        {
+            _context.Pedidos.Remove(entity);
+            await _context.SaveChangesAsync();
+        }
     }
 }

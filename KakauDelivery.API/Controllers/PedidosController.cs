@@ -74,6 +74,18 @@ namespace KakauDelivery.API.Controllers
         }
 
 
+        [HttpDelete("logical/{id}")]
+        [AuthorizeRoles("Comprador", "Vendedor")]
+        public async Task<IActionResult> DeleteLogical(int id)
+        {
+            var result = await _pedidoApp.DeleteLogical(id);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         [AuthorizeRoles("Comprador", "Vendedor")]
         public async Task<IActionResult> Delete(int id)
@@ -85,5 +97,18 @@ namespace KakauDelivery.API.Controllers
 
             return NoContent();
         }
+
+        [Authorize(Roles = "Vendedor")]
+        [HttpPost("pagarPedido")]
+        public async Task<IActionResult> PagarPedido(PedidoPagarInputModel inputModel)
+        {
+            var result = await _pedidoApp.PagarPedido(inputModel);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(result);
+        }
+
     }
 }

@@ -29,7 +29,7 @@ namespace KakauDelivey.Infra.Repositories
             _context.Set<T>().Update(entity);
             await SaveChanges();
         }
-
+      
         public async Task SaveChanges()
         {
             await _context.SaveChangesAsync();

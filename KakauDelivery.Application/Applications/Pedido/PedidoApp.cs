@@ -1,12 +1,10 @@
 ﻿using KakauDelivery.Application.Applications.Interfaces;
 using KakauDelivery.Application.Interop;
-using KakauDelivery.Application.Interop.Cliente;
 using KakauDelivery.Application.Interop.ItemPedido.Mapper;
 using KakauDelivery.Application.Interop.Pedido;
 using KakauDelivery.Application.Interop.Pedido.Mapper;
 using KakauDelivery.Application.Services.Interfaces;
 using KakauDelivery.Domain.Repositories.RepositoryReadOnly;
-using KakauDelivey.Infra.RepositoriesReadOnly;
 
 namespace KakauDelivery.Application.Applications.Pedido
 {
@@ -28,7 +26,7 @@ namespace KakauDelivery.Application.Applications.Pedido
                 return ResultViewModel<PedidoViewModel>.Error("Pedito sem itens.");
 
             var pedido = inputModel.InputModelForEntity();
-            
+
             pedido.AguardandoPagamento();
 
             await _pedidoService.Create(pedido);
@@ -36,6 +34,23 @@ namespace KakauDelivery.Application.Applications.Pedido
             return ResultViewModel<PedidoViewModel>.Success(pedido.EntityForViewModel());
         }
 
+        public async Task<ResultViewModel> DeleteLogical(int id)
+        {
+            var pedido = await _pedidoRepositoryReadOnly.GetById(id);
+
+            if (pedido is null)
+                return ResultViewModel.Error("Pedido não encontrado.");
+
+            if (pedido.PedidoPago())
+                return ResultViewModel.Error("O Pedido já está Pago. Não pode ser excluído");
+
+            pedido.SetAsDeleted();
+            pedido.SetAsDateUpdate();
+
+            await _pedidoService.Delete(pedido);
+
+            return ResultViewModel.Success();
+        }
         public async Task<ResultViewModel> Delete(int id)
         {
             var pedido = await _pedidoRepositoryReadOnly.GetById(id);
@@ -99,6 +114,20 @@ namespace KakauDelivery.Application.Applications.Pedido
             await _pedidoService.Update(pedido);
 
             return ResultViewModel<PedidoViewModel>.Success();
+        }
+
+        public async Task<ResultViewModel<PedidoViewModel>> PagarPedido(PedidoPagarInputModel inputModel)
+        {
+            var pedido = await _pedidoRepositoryReadOnly.GetPedidoByCliente(inputModel.IdPedido,inputModel.IdCliente);
+
+            if (pedido is null)
+                return ResultViewModel<PedidoViewModel>.Error("Pedido não encontrado.");
+
+            pedido.Pago();
+
+            await _pedidoService.Update(pedido);
+
+            return ResultViewModel<PedidoViewModel>.Success(pedido.EntityForViewModel());
         }
     }
 }
