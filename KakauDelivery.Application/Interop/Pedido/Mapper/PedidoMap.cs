@@ -1,4 +1,5 @@
-﻿using KakauDelivery.Application.Interop.ItemPedido;
+﻿using KakauDelivery.Application.Interop.Cliente;
+using KakauDelivery.Application.Interop.ItemPedido;
 using KakauDelivery.Application.Interop.ItemPedido.Mapper;
 using KakauDelivery.Application.Interop.Produto.Mapper;
 
@@ -24,6 +25,19 @@ namespace KakauDelivery.Application.Interop.Pedido.Mapper
                 Total = entity.Total,
                 Itens = entity.Itens.EntityForViewModelList()
             };
+        }
+
+        public static IEnumerable<PedidoViewModel> EntityForViewModelList(this IEnumerable<Domain.Entities.Pedido> entityList)
+        {
+            return (from entity in entityList
+                    select new PedidoViewModel
+                    {
+                        NumeroPedido = entity.Id,
+                        DataPedido = entity.DataPedido,
+                        Total = entity.Total,
+                        Status = entity.Status,
+                        Itens = entity.Itens.EntityForViewModelList()
+                    }).ToList();
         }
     }
 }

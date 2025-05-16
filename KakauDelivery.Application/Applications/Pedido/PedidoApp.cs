@@ -1,10 +1,12 @@
 ﻿using KakauDelivery.Application.Applications.Interfaces;
 using KakauDelivery.Application.Interop;
+using KakauDelivery.Application.Interop.Cliente;
 using KakauDelivery.Application.Interop.ItemPedido.Mapper;
 using KakauDelivery.Application.Interop.Pedido;
 using KakauDelivery.Application.Interop.Pedido.Mapper;
 using KakauDelivery.Application.Services.Interfaces;
 using KakauDelivery.Domain.Repositories.RepositoryReadOnly;
+using KakauDelivey.Infra.RepositoriesReadOnly;
 
 namespace KakauDelivery.Application.Applications.Pedido
 {
@@ -50,6 +52,13 @@ namespace KakauDelivery.Application.Applications.Pedido
             await _pedidoService.Delete(pedido);
 
             return ResultViewModel.Success();
+        }
+
+        public async Task<ResultViewModel<IEnumerable<PedidoViewModel>>> GetAll()
+        {
+            var pedidos = await _pedidoRepositoryReadOnly.GetAll();
+
+            return ResultViewModel<IEnumerable<PedidoViewModel>>.Success(pedidos.EntityForViewModelList());
         }
 
         public async Task<ResultViewModel<PedidoViewModel>> GetById(int id)

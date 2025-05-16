@@ -1,4 +1,5 @@
-﻿using KakauDelivery.Application.Applications.Interfaces;
+﻿using KakauDelivery.Application.Applications.Cliente;
+using KakauDelivery.Application.Applications.Interfaces;
 using KakauDelivery.Application.Interop.Pedido;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,14 @@ namespace KakauDelivery.API.Controllers
 
             if (!result.IsSuccess)
                 return BadRequest(result.Message);
+
+            return Ok(result);
+        }
+
+        [HttpGet("getAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _pedidoApp.GetAll();
 
             return Ok(result);
         }
