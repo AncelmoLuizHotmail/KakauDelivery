@@ -1,12 +1,12 @@
 ﻿using KakauDelivery.Application.Applications.Cliente;
 using KakauDelivery.Application.Applications.Interfaces;
-using KakauDelivery.Application.Services.Interfaces;
+using KakauDelivery.Application.Applications.Pedido;
 using KakauDelivery.Application.Services;
+using KakauDelivery.Application.Services.Interfaces;
 using KakauDelivery.Domain.Repositories.Repository;
 using KakauDelivery.Domain.Repositories.RepositoryReadOnly;
 using KakauDelivey.Infra.Repositories;
 using KakauDelivey.Infra.RepositoriesReadOnly;
-using KakauDelivery.Application.Applications.Pedido;
 
 namespace KakauDelivery.API.Configurations
 {
