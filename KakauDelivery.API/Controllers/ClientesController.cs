@@ -36,6 +36,9 @@ namespace KakauDelivery.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(ClienteInputModel inputModel)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var result = await _clienteApp.Create(inputModel);
 
             return CreatedAtAction(nameof(GetById), new { id = result.Data?.Id }, result);
