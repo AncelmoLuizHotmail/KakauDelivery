@@ -20,7 +20,9 @@ namespace KakauDelivery.Application.Services
             try
             {
                 await _unitOfWork.BeginTransactionAsync();
+
                 await _pedidoRepository.Create(entity);
+
                 await _unitOfWork.CommitAsync();
             }
             catch (Exception)
@@ -44,12 +46,12 @@ namespace KakauDelivery.Application.Services
                 throw;
             }
         }
-        public async Task Delete(Pedido entity)
+        public async Task DeletePhysical(Pedido entity)
         {
             try
             {
                 await _unitOfWork.BeginTransactionAsync();
-                await _pedidoRepository.Excluir(entity);
+                await _pedidoRepository.DeletePhysical(entity);
                 await _unitOfWork.CommitAsync();
             }
             catch (Exception)

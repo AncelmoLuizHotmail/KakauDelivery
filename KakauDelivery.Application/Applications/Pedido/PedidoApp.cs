@@ -47,11 +47,11 @@ namespace KakauDelivery.Application.Applications.Pedido
             pedido.SetAsDeleted();
             pedido.SetAsDateUpdate();
 
-            await _pedidoService.Delete(pedido);
+            await _pedidoService.DeleteLogical(pedido);
 
             return ResultViewModel.Success();
         }
-        public async Task<ResultViewModel> Delete(int id)
+        public async Task<ResultViewModel> DeletePhysical(int id)
         {
             var pedido = await _pedidoRepositoryReadOnly.GetById(id);
 
@@ -64,7 +64,7 @@ namespace KakauDelivery.Application.Applications.Pedido
             pedido.SetAsDeleted();
             pedido.SetAsDateUpdate();
 
-            await _pedidoService.Delete(pedido);
+            await _pedidoService.DeletePhysical(pedido);
 
             return ResultViewModel.Success();
         }

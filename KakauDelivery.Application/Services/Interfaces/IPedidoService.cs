@@ -6,7 +6,7 @@ namespace KakauDelivery.Application.Services.Interfaces
     {
         Task Create(Pedido entity);
         Task Update(Pedido entity);
-        Task Delete(Pedido entity);
+        Task DeletePhysical(Pedido entity);
         Task DeleteLogical(Pedido entity);
     }
 }

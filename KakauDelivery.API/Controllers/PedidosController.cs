@@ -86,11 +86,11 @@ namespace KakauDelivery.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("physical/{id}")]
         [AuthorizeRoles("Comprador", "Vendedor")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeletePhysical(int id)
         {
-            var result = await _pedidoApp.Delete(id);
+            var result = await _pedidoApp.DeletePhysical(id);
 
             if (!result.IsSuccess)
                 return BadRequest(result.Message);

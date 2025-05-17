@@ -10,7 +10,7 @@ namespace KakauDelivey.Infra.Repositories
         {
         }
 
-        public async Task Excluir(Pedido entity)
+        public async Task DeletePhysical(Pedido entity)
         {
             _context.Pedidos.Remove(entity);
             await _context.SaveChangesAsync();

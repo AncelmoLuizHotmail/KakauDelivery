@@ -11,7 +11,7 @@ namespace KakauDelivery.Application.Applications.Interfaces
         Task<ResultViewModel<PedidoViewModel>> Create(PedidoInputModel inputModel);
         Task<ResultViewModel> Update(int id, PedidoInputModel inputModel);
         Task<ResultViewModel> DeleteLogical(int id);
-        Task<ResultViewModel> Delete(int id);
+        Task<ResultViewModel> DeletePhysical(int id);
         Task<ResultViewModel<PedidoViewModel>> PagarPedido(PedidoPagarInputModel inputModel);
     }
 }
