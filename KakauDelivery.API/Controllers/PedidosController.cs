@@ -63,9 +63,9 @@ namespace KakauDelivery.API.Controllers
 
         [HttpPut("{id}")]
         [AuthorizeRoles("Comprador", "Vendedor")]
-        public async Task<IActionResult> Put(int id, PedidoInputModel cliente)
+        public async Task<IActionResult> Put(int id, PedidoInputModel inputModel)
         {
-            var result = await _pedidoApp.Update(id, cliente);
+            var result = await _pedidoApp.Update(id, inputModel);
 
             if (!result.IsSuccess)
                 return BadRequest(result.Message);

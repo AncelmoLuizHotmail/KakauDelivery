@@ -118,7 +118,7 @@ namespace KakauDelivery.Application.Applications.Pedido
 
             var itens = inputModel.Itens.Select(x => x.InputModelForEntity()).ToList();
 
-            pedido.Update(inputModel.IdCliente, inputModel.DataPedido, itens);
+            pedido.Update(inputModel.IdCliente, inputModel.DataPedido, itens, inputModel.CalcularTotal());
             pedido.SetAsDateUpdate();
 
             await _pedidoService.Update(pedido);

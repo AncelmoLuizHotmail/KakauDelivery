@@ -21,11 +21,12 @@ namespace KakauDelivery.Domain.Entities
         public Cliente Cliente { get; private set; }
         public List<ItemPedido> Itens { get; private set; }
 
-        public void Update(int idCliente, DateTime dataPedido, List<ItemPedido> itens)
+        public void Update(int idCliente, DateTime dataPedido, List<ItemPedido> itens, decimal total)
         {
             IdCliente = idCliente;
             DataPedido = dataPedido;
             Itens = itens;
+            Total = total;
         }
         public decimal AdicionarTotal(decimal total) => Total = total;
         public void AguardandoPagamento() => Status = StatusPedidoEnum.AguardandoPagamento;
