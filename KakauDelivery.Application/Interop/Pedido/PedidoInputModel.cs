@@ -10,14 +10,6 @@ namespace KakauDelivery.Application.Interop.Pedido
 
         public List<ItemPedidoInputModel> Itens { get; set; }
 
-        //private decimal _Total;
-
-        //[NotMapped]
-        //public decimal Total
-        //{
-        //    get { return _Total; }
-        //    set { _Total = CalcularTotal(); }
-        //}
         public decimal CalcularTotal() => Itens.Sum(i => i.Quantidade * i.Produto.Preco);
     }
 }

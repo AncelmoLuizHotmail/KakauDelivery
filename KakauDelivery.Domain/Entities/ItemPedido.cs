@@ -4,10 +4,11 @@
     {
         public ItemPedido() { }
 
-        public ItemPedido(int idProduto, int quantidade)
+        public ItemPedido(int idProduto, int quantidade, Produto produto = null)
         {
             IdProduto = idProduto;
             Quantidade = quantidade;
+            Produto = produto;
         }
 
         public int IdPedido { get; private set; }
@@ -16,10 +17,5 @@
 
         public Pedido Pedido { get; private set; }
         public Produto Produto { get; private set; }
-
-        public void AgregatePedido(Pedido pedido) 
-        { 
-            Pedido = pedido;
-        }
     }
 }
