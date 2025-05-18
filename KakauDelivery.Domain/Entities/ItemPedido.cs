@@ -4,11 +4,10 @@
     {
         public ItemPedido() { }
 
-        public ItemPedido(Produto produto, int quantidade)
+        public ItemPedido(int idProduto, int quantidade)
         {
-            IdProduto = produto.Id;
+            IdProduto = idProduto;
             Quantidade = quantidade;
-            Produto = produto;
         }
 
         public int IdPedido { get; private set; }

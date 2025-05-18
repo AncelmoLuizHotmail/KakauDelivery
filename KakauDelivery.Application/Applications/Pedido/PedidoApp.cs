@@ -27,11 +27,18 @@ namespace KakauDelivery.Application.Applications.Pedido
 
             var pedido = inputModel.InputModelForEntity();
 
+            pedido.AdicionarTotal(inputModel.CalcularTotal());
+
             pedido.AguardandoPagamento();
 
             await _pedidoService.Create(pedido);
 
-            return ResultViewModel<PedidoViewModel>.Success(pedido.EntityForViewModel());
+            var novoPedido = await _pedidoRepositoryReadOnly.GetById(pedido.Id);
+
+            if (novoPedido is null)
+                return ResultViewModel<PedidoViewModel>.Error("Erro ao criar o pedido.");
+
+            return ResultViewModel<PedidoViewModel>.Success(novoPedido.EntityForViewModel());
         }
 
         public async Task<ResultViewModel> DeleteLogical(int id)
@@ -46,6 +53,9 @@ namespace KakauDelivery.Application.Applications.Pedido
 
             pedido.SetAsDeleted();
             pedido.SetAsDateUpdate();
+
+            pedido.Itens.ForEach(x => x.SetAsDeleted());
+            pedido.Itens.ForEach(x => x.SetAsDateUpdate());
 
             await _pedidoService.DeleteLogical(pedido);
 

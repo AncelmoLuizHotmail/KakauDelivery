@@ -11,7 +11,6 @@ namespace KakauDelivery.Domain.Entities
             IdCliente = idCliente;
             DataPedido = dataPedido;
             Itens = itens;
-            Total = CalcularTotal();
         }
 
         public int IdCliente { get; private set; }
@@ -28,7 +27,7 @@ namespace KakauDelivery.Domain.Entities
             DataPedido = dataPedido;
             Itens = itens;
         }
-        private decimal CalcularTotal() => Itens.Sum(i => i.Quantidade * i.Produto.Preco);
+        public decimal AdicionarTotal(decimal total) => Total = total;
         public void AguardandoPagamento() => Status = StatusPedidoEnum.AguardandoPagamento;
         public void Pago() => Status = StatusPedidoEnum.Pago;
         public bool PedidoPago() => Status == StatusPedidoEnum.Pago ? true : false;
