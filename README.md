@@ -5,6 +5,7 @@
  <li>Clean Architecture (camadas separadas: API, Application, Domain, Infrastructure)</li>
  <li>Clean Code (SOLID, KISS, DRY)</li>
  <li>Autenticação JWT</li>
+  <li>xUnit Tests</li>
  <li>Entity Framework Core</li>
  <li>Mapper (raíz na munheca!)</li>
  <li>Swagger/OpenAPI</li>
