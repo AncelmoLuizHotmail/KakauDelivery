@@ -30,7 +30,7 @@ namespace KakauDelivery.API.Controllers
 
         [HttpPost("getAll")]
         [Authorize(Roles = "Vendedor")]
-        public async Task<IActionResult> GetAll([FromBody]PedidoFilter filter)
+        public async Task<IActionResult> GetAll(PedidoFilter filter)
         {
             var result = await _pedidoApp.GetAll(filter);
 
