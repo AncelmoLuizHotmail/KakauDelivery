@@ -1,10 +1,9 @@
-﻿using KakauDelivery.Domain.Entities;
+﻿using KakauDelivery.Application.Interop;
 
 namespace KakauDelivery.Application.Services.Interfaces
 {
     public interface IAuthService
     {
-        Task<string> Authenticate(string email, string senha);
-        Task<Usuario> GetById(int idUsuario);
+        Task<ResultViewModel<string>> Authenticate(string email, string senha);
     }
 }

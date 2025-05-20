@@ -1,4 +1,5 @@
 using KakauDelivery.API.Configurations;
+using KakauDelivery.API.Middlewares;
 using KakauDelivery.Application.Applications.Interfaces;
 using KakauDelivery.Application.Services;
 using KakauDelivery.Application.Services.Interfaces;
@@ -95,4 +96,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.Run();
