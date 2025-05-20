@@ -7,7 +7,7 @@
  <li>Autenticação JWT</li>
   <li>xUnit Tests</li>
  <li>Entity Framework Core</li>
- <li>Mapper (raíz na munheca!)</li>
+ <li>Mapper</li>
  <li>Swagger/OpenAPI</li>
 
  <li>Banco de dados SqlServer</li>
